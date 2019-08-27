@@ -29,7 +29,7 @@
       <audio src="/static/img/bg.mp3" loop ref="audio"></audio>
     </div>
     <!-- swiper -->
-    <swiper class="swiper" :options="swiperOption" ref="mySwiper">
+    <swiper :class="['swiper',{'active':closeVideo}]" :options="swiperOption" ref="mySwiper">
       <!-- slides -->
       <swiper-slide :class="{'active':swiperNow == 0}">
         <div class="box" :style="{'width':hh+'px','height':ww+'px'}">
@@ -216,10 +216,12 @@ export default {
   methods: {
     handleStart() {
       this.imgOver = true;
-      if (this.videoEl.paused && this.startVideo) {
-        this.videoEl.play();
-        // this.handleCan();
-      }
+      document.querySelector("video").play();
+      //   this.handleCan();
+      //   if (this.videoEl.paused && this.startVideo) {
+      //     this.videoEl.play();
+      //     // this.handleCan();
+      //   }
       if (this.$refs.audio.paused) {
         this.$refs.audio.play();
       }
@@ -294,11 +296,10 @@ export default {
       let can = document.querySelector(".can");
       let ctx = can.getContext("2d");
       let video = document.querySelector("video");
-      can.width = this.ww;
-      can.height = this.hh;
+      can.width = this.ww * 3.4;
+      can.height = this.hh * 3.4;
       let time = setInterval(() => {
         ctx.drawImage(video, 0, 0, can.width, can.height);
-        console.log(1);
         if (this.closeVideo) {
           clearInterval(time);
         }
@@ -443,7 +444,6 @@ function setRem() {
         height: 100%;
         object-fit: scale-down;
         object-position: 50% 50%;
-        // display: none;
       }
       .can {
         position: absolute;
@@ -451,7 +451,6 @@ function setRem() {
         left: 0;
         width: 100%;
         height: 100%;
-        display: none;
       }
       &.active {
         transform: matrix(1, 0, 0, 1, 0, 0);
@@ -465,6 +464,10 @@ function setRem() {
   .swiper {
     width: 100%;
     height: 100%;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
     .swiper-slide {
       position: relative;
       display: flex;

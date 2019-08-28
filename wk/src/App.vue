@@ -23,4 +23,7 @@ export default {
   height: 100%;
   overflow: hidden;
 }
+.swiper-one > .swiper-wrapper {
+  flex-direction: column;
+}
 </style>

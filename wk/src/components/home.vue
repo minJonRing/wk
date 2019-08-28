@@ -1,7 +1,11 @@
 <template>
   <div class="home" ref="home">
     <!-- loading -->
-    <div :class="['loading',{'active':imgOver}]" @click.stop="handleStart">
+    <div :class="['loading',{'active':start}]" @click.stop="handleStart">
+      <div class="loading-text">
+        <p>{{loadingText}}</p>
+        <p>建议手机横屏观看</p>
+      </div>
       <div class="progress">
         <span class="bar" :style="{'width':bar+'%'}"></span>
       </div>
@@ -11,7 +15,7 @@
       <div :class="['box',{'active':trans}]" :style="{'width':hh+'px','height':ww+'px'}">
         <canvas class="can"></canvas>
         <video
-          src="/static/img/init.mp4"
+          src="http://www.hzsinq.com/static/img/init.mp4"
           ref="video"
           muted
           x-webkit-airplay="true"
@@ -20,87 +24,253 @@
           preload="auto"
           x5-video-player-type="h5"
           x5-video-player-fullscreen="true"
-          autoplay
         ></video>
       </div>
     </div>
     <!-- mp3 -->
     <div class="mp3">
-      <audio src="/static/img/bg.mp3" loop ref="audio"></audio>
+      <audio src="http://www.hzsinq.com/static/img/bg.mp3" loop controls ref="audio"></audio>
     </div>
     <!-- swiper -->
-    <swiper :class="['swiper',{'active':closeVideo}]" :options="swiperOption" ref="mySwiper">
+    <swiper
+      :class="['swiper swiper-one',{'active':closeVideo}]"
+      :options="swiperOption"
+      ref="mySwiper"
+    >
       <!-- slides -->
       <swiper-slide :class="{'active':swiperNow == 0}">
         <div class="box" :style="{'width':hh+'px','height':ww+'px'}">
-          <img
-            :class="{'active':trans && swiperNow == 0}"
-            :src="loadImg[0].bg"
-            v-if="handleShowImg(0)"
-            alt
-          />
-          <div class="controller">
-            <a href="javascript:" class="a1" @click.stop="handleToChild(0)">11</a>
-            <a href="javascript:" class="a2" @click.stop="handleToChild(1)">2</a>
-            <a href="javascript:" class="a3" @click.stop="handleToChild(2)">3</a>
-            <a href="javascript:" class="a4" @click.stop="handleToChild(3)">4</a>
-            <a href="javascript:" class="a5" @click.stop="handleToChild(4)">5</a>
-            <a href="javascript:" class="a6" @click.stop="handleToChild(5)">6</a>
+          <img :class="{'active':trans && swiperNow == 0}" :src="p4Img" v-if="p4Img" alt />
+          <div :class="['controller',{'active':trans && swiperNow == 0}]">
+            <a href="javascript:" class="a1" @click.stop="handleToChild(3)"></a>
+            <a href="javascript:" class="a2" @click.stop="handleToChild(5)"></a>
+            <a href="javascript:" class="a3" @click.stop="handleToChild(0)"></a>
+            <a href="javascript:" class="a4" @click.stop="handleToChild(4)"></a>
+            <a href="javascript:" class="a5" @click.stop="handleToChild(2)"></a>
+            <a href="javascript:" class="a6" @click.stop="handleToChild(1)"></a>
           </div>
         </div>
       </swiper-slide>
+      <!-- slides -->
       <swiper-slide :class="{'active':swiperNow == 1}">
-        <swiper class="swiper" :options="swiperChildOption" ref="childSwiper">
+        <swiper class="swiper active" :options="swiperChildOption" ref="childSwiper">
           <!-- slides -->
           <swiper-slide :class="{'active':swiperNow == 1}">
             <div
-              :class="['box',{'active':trans && swiperNow == 1}]"
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
               :style="{'width':hh+'px','height':ww+'px'}"
             >
-              <a href="javascript:" @click.stop="handleGrand(0)">1</a>
-              <a href="javascript:" @click.stop="handleGrand(1)">2</a>
-              <a href="javascript:" @click.stop="handleGrand(2)">3</a>
-              <a href="javascript:" @click.stop="handleGrand(3)">4</a>
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/1.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/at/2.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2">
+                <img src="/static/img/p5/at/3.png" alt />
+              </a>
+              <a
+                href="http://www.xsnet.cn/news/szjj/2017_10/2821604.shtml"
+                class="p5-3"
+                target="_blank"
+              >
+                <img src="/static/img/p5/at/4.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/at/1.png" alt />
+              </a>
+              <a class="call" href="tel:15657162923"></a>
             </div>
           </swiper-slide>
-          <swiper-slide :class="{'active':swiperNow == 4}">
+          <!-- <swiper-slide :class="{'active':swiperNow == 1}">
+            <p5
+              :direction="trans"
+              :ww="ww"
+              :hh="hh"
+              :config="config.p2"
+              @handleGrand="handleGetGrand"
+            />
+          </swiper-slide>-->
+          <swiper-slide :class="{'active':swiperNow == 1}">
             <div
-              :class="['box',{'active':trans && swiperNow == 4}]"
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
               :style="{'width':hh+'px','height':ww+'px'}"
             >
-              <a href="javascript:" @click.stop="handleGrand(0)">1</a>
-              <a href="javascript:" @click.stop="handleGrand(1)">2</a>
-              <a href="javascript:" @click.stop="handleGrand(2)">3</a>
-              <a href="javascript:" @click.stop="handleGrand(3)">4</a>
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/2.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/jn/2.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2">
+                <img src="/static/img/p5/jn/3.png" alt />
+              </a>
+              <a
+                href="https://mp.weixin.qq.com/s/5BmAMb-wnIt9cb-x6Z5jwA"
+                class="p5-3"
+                target="_blank"
+              >
+                <img src="/static/img/p5/jn/4.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/jn/1.png" alt />
+              </a>
+              <a class="call" href="tel:15088716743"></a>
             </div>
           </swiper-slide>
-          <swiper-slide :class="{'active':swiperNow == 4}">
+          <swiper-slide :class="{'active':swiperNow == 1}">
             <div
-              :class="['box',{'active':trans && swiperNow == 4}]"
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
               :style="{'width':hh+'px','height':ww+'px'}"
             >
-              <a href="javascript:" @click.stop="handleGrand(0)">1</a>
-              <a href="javascript:" @click.stop="handleGrand(1)">2</a>
-              <a href="javascript:" @click.stop="handleGrand(2)">3</a>
-              <a href="javascript:" @click.stop="handleGrand(3)">4</a>
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/3.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/kh/1.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2">
+                <img src="/static/img/p5/kh/3.png" alt />
+              </a>
+              <a
+                class="p5-3"
+                href="http://www.hzxh.gov.cn/col/col1376445/index.html"
+                target="_blank"
+              >
+                <img src="/static/img/p5/kh/4.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/kh/2.png" alt />
+              </a>
+              <a class="call" href="tel:0571-28822255"></a>
             </div>
           </swiper-slide>
-          <swiper-slide :class="{'active':swiperNow == 4}">1</swiper-slide>
-          <swiper-slide :class="{'active':swiperNow == 4}">1</swiper-slide>
-          <swiper-slide :class="{'active':swiperNow == 4}">1</swiper-slide>
+          <swiper-slide :class="{'active':swiperNow == 1}">
+            <div
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
+              :style="{'width':hh+'px','height':ww+'px'}"
+            >
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/4.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/lc/1.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2">
+                <img src="/static/img/p5/lc/3.png" alt />
+              </a>
+              <a
+                class="p5-3"
+                href="http://www.xclcy.com/policy/show.php?itemid=170"
+                target="_blank"
+              >
+                <img src="/static/img/p5/lc/4.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/lc/2.png" alt />
+              </a>
+              <a class="call" href="tel:15990174232"></a>
+            </div>
+          </swiper-slide>
+          <swiper-slide :class="{'active':swiperNow == 1}">
+            <div
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
+              :style="{'width':hh+'px','height':ww+'px'}"
+            >
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/5.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/wl/1.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2">
+                <img src="/static/img/p5/wl/4.png" alt />
+              </a>
+              <a
+                href="http://www.eyh.cn/class/class_24/Articles/466592.html"
+                target="_blank"
+                class="p5-3"
+              >
+                <img src="/static/img/p5/wl/3.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/wl/2.png" alt />
+              </a>
+              <a class="call" href="tel:15055308370"></a>
+            </div>
+          </swiper-slide>
+          <swiper-slide :class="{'active':swiperNow == 1}">
+            <div
+              :class="['box p5-box',{'active':trans && swiperNow == 1}]"
+              :style="{'width':hh+'px','height':ww+'px'}"
+            >
+              <img
+                :class="['bg',{'active':trans && swiperNow == 2}]"
+                src="http://www.hzsinq.com/static/img/p5/6.png"
+                alt
+              />
+              <a href="javascript:" class="p5-1" @click.stop="handleGetGrand(0)">
+                <img src="/static/img/p5/yh/1.png" alt />
+              </a>
+              <a href="javascript:" class="p5-2" @click.stop="handleGetGrand(1)">
+                <img src="/static/img/p5/yh/4.png" alt />
+              </a>
+              <a
+                href="/static/img/1.pdf"
+                download="拱墅汽车互联网小镇政策扶持汇编和举措——特色小镇申报.pdf"
+                target="_blank"
+                class="p5-3"
+              >
+                <img src="/static/img/p5/yh/3.png" alt />
+              </a>
+              <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(2)">
+                <img src="/static/img/p5/yh/2.png" alt />
+              </a>
+              <a class="call" href="tel:0571-88998899"></a>
+            </div>
+          </swiper-slide>
           <div class="swiper-child-pagination" slot="pagination"></div>
         </swiper>
       </swiper-slide>
+      <!-- slides -->
       <swiper-slide :class="{'active':swiperNow == 2}">
-        <swiper class="swiper" :options="swiperGrandOption" ref="grandSwiper">
+        <swiper class="swiper active" :options="swiperGrandOption" ref="grandSwiper">
           <!-- slides -->
           <swiper-slide
             :class="{'active':1}"
-            v-for="(item,index) in grandImg[childIndex]"
+            v-for="(item,index) in config[childIndex]"
             :key="index"
           >
-            <div class="box" :style="{'width':hh+'px','height':ww+'px'}">
-              <img :class="{'active':trans && swiperNow == 5}" :src="item" alt />
+            <div
+              :class="['box',{'active':trans && swiperNow == 2}]"
+              :style="{'width':hh+'px','height':ww+'px'}"
+            >
+              <img :src="item.add" alt />
+              <a class="p6-call" :href="item.tel"></a>
+              <div class="p6-cont" if="item.isText">
+                <swiper class="swiper active" :options="swiperScrollOption" ref="scrollSwiper">
+                  <!-- slides -->
+                  <swiper-slide class="active scroll-swiper">
+                    <div class="p6-cont-box" v-for="(i,j) in item.text" :key="j">
+                      <div class="p6-cont-title">{{i.name}}</div>
+                      <div class="p6-cont-text" v-if="i.cont" v-html="i.cont"></div>
+                      <div class="p6-cont-text" v-if="i.child">
+                        <p v-for="(x,y) in i.child" :key="y">{{x}}</p>
+                      </div>
+                    </div>
+                  </swiper-slide>
+                </swiper>
+              </div>
             </div>
           </swiper-slide>
           <div class="swiper-grand-pagination" slot="pagination"></div>
@@ -114,16 +284,29 @@
 </template>
 
 <script>
+import P5 from "./p5";
+import config from "../../static/js/config";
 export default {
   name: "home",
   data() {
     return {
+      host: "http://www.hzsinq.com",
+      config: config.p6,
+      // 进度条
       bar: 0,
+      loadingText: "六大万科中心，即将开启",
       imgOver: false,
+      start: false,
+      // 视频
       closeVideo: false,
       startVideo: false,
+      // 预加载
+      awaitOne: 0,
+      awaitTow: 0,
+      // 长宽
       ww: 0,
       hh: 0,
+      // swiper
       swiperNow: 0,
       trans: false,
       swiperTo: false,
@@ -131,55 +314,18 @@ export default {
       swiperOption: {},
       swiperChildOption: {},
       swiperGrandOption: {},
-      awaitImg: [
-        {
-          index: 0,
-          name: "bg",
-          url: "/static/img/p4.png"
-        },
-        {
-          index: 1,
-          name: "bg",
-          url:
-            "http://img2.ph.126.net/KJUpspbXpH1i1tspv7qm1A==/6598082416866994649.jpg"
-        },
-        {
-          index: 2,
-          name: "bg",
-          url:
-            "http://img1.imgtn.bdimg.com/it/u=1182845185,1102036488&fm=26&gp=0.jpg"
-        },
-        {
-          index: 3,
-          name: "bg",
-          url: "http://pic11.nipic.com/20101121/1295091_153622414944_2.jpg"
-        }
-      ],
+      swiperScrollOption: {},
+      // 待加载图片
+      p4Img: "",
+      awaitImg: [],
       loadImg: [],
-      childIndex: 0,
-      grandImg: [
-        [
-          "http://img4.imgtn.bdimg.com/it/u=1862338439,4167832155&fm=26&gp=0.jpg",
-          "http://5b0988e595225.cdn.sohucs.com/images/20171102/e1088076befd4e5ea4a6457f015ea3f3.jpeg",
-          "http://img3.333cn.com/img333cn/2017/09/29/1506678765453.jpg"
-        ],
-        [
-          "http://img4.imgtn.bdimg.com/it/u=1862338439,4167832155&fm=26&gp=0.jpg",
-          "http://img3.333cn.com/img333cn/2017/09/29/1506678765453.jpg",
-          "http://5b0988e595225.cdn.sohucs.com/images/20171102/e1088076befd4e5ea4a6457f015ea3f3.jpeg"
-        ],
-        [
-          "http://img3.333cn.com/img333cn/2017/09/29/1506678765453.jpg",
-          "http://img4.imgtn.bdimg.com/it/u=1862338439,4167832155&fm=26&gp=0.jpg",
-          "http://5b0988e595225.cdn.sohucs.com/images/20171102/e1088076befd4e5ea4a6457f015ea3f3.jpeg"
-        ]
-      ]
+      childIndex: 0
     };
   },
   created() {
     setRem(); //设置rem
     this.handleInitSwiper(0); //设置swiper配置
-    this.handleInitImg(); //设置img
+    // this.handleInitImg(); //设置img
   },
   computed: {
     swiper() {
@@ -193,6 +339,15 @@ export default {
     },
     videoEl() {
       return this.$refs.video;
+    },
+    audioEl() {
+      return this.$refs.audio;
+    }
+  },
+  watch: {
+    awaitOne(db) {
+      this.bar = Math.round((db / 9) * 100);
+      this.loadingText = db == 9 ? "点击进入" : "六大万科中心，即将开启";
     }
   },
   mounted() {
@@ -211,22 +366,35 @@ export default {
       }
     }
     resize(true);
-    this.handleInitVideo();
+    this.handleAwaitOne();
   },
   methods: {
     handleStart() {
+      if (this.bar < 99) {
+        return;
+      }
       this.imgOver = true;
+      this.start = true;
       document.querySelector("video").play();
-      //   this.handleCan();
-      //   if (this.videoEl.paused && this.startVideo) {
-      //     this.videoEl.play();
-      //     // this.handleCan();
+      // var el = document.documentElement;
+      // var rfs =
+      //   el.requestFullScreen ||
+      //   el.webkitRequestFullScreen ||
+      //   el.mozRequestFullScreen ||
+      //   el.msRequestFullScreen;
+      // if (typeof rfs != "undefined" && rfs) {
+      //   rfs.call(el);
+      // } else if (typeof window.ActiveXObject != "undefined") {
+      //   var wscript = new ActiveXObject("WScript.Shell");
+      //   if (wscript != null) {
+      //     wscript.SendKeys("{F11}");
       //   }
+      // }
       if (this.$refs.audio.paused) {
         this.$refs.audio.play();
       }
     },
-    handleInitSwiper(i = 5) {
+    handleInitSwiper(i = 0) {
       //初始化swiper
       let _this = this;
       this.swiperOption = {
@@ -266,7 +434,17 @@ export default {
         }
       };
       this.swiperGrandOption = {
+        mousewheel: true,
+        slidesPerView: "auto",
+        // freeMode: true,
         pagination: { el: ".swiper-grand-pagination" }
+      };
+      this.swiperScrollOption = {
+        direction: "vertical",
+        slidesPerView: "auto",
+        mousewheelControl: true,
+        freeMode: true,
+        nested: true
       };
     },
     handleInitImg() {
@@ -292,27 +470,44 @@ export default {
         img.src = arr[i].url;
       }
     },
-    handleCan() {
-      let can = document.querySelector(".can");
-      let ctx = can.getContext("2d");
-      let video = document.querySelector("video");
-      can.width = this.ww * 3.4;
-      can.height = this.hh * 3.4;
-      let time = setInterval(() => {
-        ctx.drawImage(video, 0, 0, can.width, can.height);
-        if (this.closeVideo) {
-          clearInterval(time);
-        }
-      }, 30);
-    },
-    handleInitVideo() {
+    handleAwaitOne() {
       //控制视频播放，暂停
+      let videoPlay = false,
+        audioPlay = false;
       this.videoEl.oncanplay = () => {
-        this.startVideo = true;
+        this.awaitOne += 1;
+        videoPlay = true;
       };
       this.videoEl.onended = () => {
         this.closeVideo = true;
       };
+      // mp3
+      this.audioEl.oncanplay = () => {
+        this.awaitOne += 1;
+        audioPlay = true;
+      };
+      // p4 img
+      let img = new Image();
+      img.onload = () => {
+        this.awaitOne += 1;
+        this.p4Img = "http://www.hzsinq.com/static/img/p4.png";
+      };
+      img.src = "http://www.hzsinq.com/static/img/p4.png";
+      for (let i = 1; i < 7; i++) {
+        let img = new Image();
+        img.onload = () => {
+          this.awaitOne += 1;
+        };
+        img.src = "http://www.hzsinq.com/static/img/p5/" + i + ".png";
+      }
+      setTimeout(() => {
+        if (!videoPlay) {
+          this.awaitOne += 1;
+        }
+        if (!audioPlay) {
+          this.awaitOne += 1;
+        }
+      }, 5000);
     },
     handleShowImg(i) {
       //判断是否当前页
@@ -324,12 +519,17 @@ export default {
       this.swiperTo = true;
       this.swiper.slideTo(1);
       this.swiperChild.slideTo(i, 0);
+      this.childIndex = i;
     },
-    handleGrand(i) {
+    handleGetGrand(i) {
+      console.log(i);
       this.swiperTo1 = true;
       this.swiper.slideTo(2);
       this.swiperGrand.slideTo(i, 0);
     }
+  },
+  components: {
+    P5
   }
 };
 function setRem() {
@@ -376,6 +576,10 @@ function setRem() {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.scroll-swiper {
+  height: auto;
+  display: block !important;
+}
 .home {
   width: 100%;
   height: 100%;
@@ -388,17 +592,26 @@ function setRem() {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #222;
+    background-color: #333;
     z-index: 9;
     opacity: 1;
     transition-duration: 600ms;
+    .loading-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      bottom: 47%;
+      font-size: 0.4rem;
+      line-height: 1.8;
+    }
     .progress {
       position: absolute;
-      width: 80%;
+      width: 60%;
       height: 6px;
       border-radius: 3px;
-      left: 10%;
-      bottom: 10%;
+      left: 20%;
+      bottom: 45%;
       background-color: #fefefe;
       overflow: hidden;
       .bar {
@@ -459,7 +672,11 @@ function setRem() {
   }
   .mp3 {
     position: fixed;
+    opacity: 0;
     z-index: -9;
+  }
+  .swiper-wrapper {
+    flex-direction: column;
   }
   .swiper {
     width: 100%;
@@ -468,6 +685,12 @@ function setRem() {
     &.active {
       opacity: 1;
     }
+    // &.swiper-one {
+    //   color: red;
+    //   .swiper-wrapper {
+    //     flex-direction: column;
+    //   }
+    // }
     .swiper-slide {
       position: relative;
       display: flex;
@@ -491,7 +714,8 @@ function setRem() {
         transform-origin: 50% 50%;
         transform: matrix(0, 1, -1, 0, 0, 0);
         img {
-          height: 100%;
+          width: 100%;
+          // height: 100%;
           // transition-duration: 600ms;
           &.active {
             transform-origin: 50% 50%;
@@ -501,27 +725,60 @@ function setRem() {
         &.active {
           transform: matrix(1, 0, 0, 1, 0, 0);
         }
+        &.p5-box {
+          a {
+            width: 70%;
+            left: 4.5rem;
+          }
+          .p5-1 {
+            position: absolute;
+            top: 2rem;
+          }
+          .p5-2 {
+            position: absolute;
+            top: 3.5rem;
+          }
+          .p5-3 {
+            position: absolute;
+            top: 5rem;
+          }
+          .p5-4 {
+            position: absolute;
+            top: 6.5rem;
+          }
+          .call {
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            bottom: 0.8rem;
+            left: 15rem;
+          }
+        }
         .controller {
           position: absolute;
           width: 100%;
           height: 100%;
           top: 0;
           left: 0;
+          &.active {
+            transform-origin: 50% 50%;
+            transform: matrix(0, -1, 1, 0, 0, 0);
+          }
           a {
             position: absolute;
             width: 3rem;
             height: 3rem;
             &.a1 {
               top: 1.5rem;
-              left: 10rem;
+              left: 2.6rem;
             }
             &.a2 {
               top: 1.5rem;
-              left: 13.9rem;
+              left: 10rem;
             }
             &.a3 {
               top: 1.5rem;
-              left: 2.6rem;
+              left: 13.9rem;
             }
             &.a4 {
               top: 6rem;
@@ -534,6 +791,40 @@ function setRem() {
             &.a6 {
               top: 6rem;
               left: 11.3rem;
+            }
+          }
+        }
+        .p6-call {
+          position: absolute;
+          width: 1rem;
+          height: 1rem;
+          bottom: 0.3rem;
+          right: 1rem;
+        }
+        .p6-cont {
+          position: absolute;
+          width: 10rem;
+          height: 6rem;
+          left: 6rem;
+          overflow-y: scroll;
+          -webkit-overflow-scrolling: touch;
+          .p6-cont-box {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.4;
+            padding-bottom: 0.2rem;
+            .p6-cont-title {
+              background-color: #b2b2b2;
+              margin-right: 0.2rem;
+              font-size: 0.4rem;
+              padding: 0 0.1rem;
+              color: #f1f1f1;
+              flex-shrink: 0;
+            }
+            .p6-cont-text {
+              font-size: 0.4rem;
+              color: #767777;
             }
           }
         }

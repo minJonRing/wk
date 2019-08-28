@@ -1,13 +1,13 @@
 <template>
   <div class="phone" :style="{'background':color}">
-    <p>咨询热线：15657162923</p>
-    <a href="tel:15657162923">打</a>
+    <p>咨询热线：{{phone}}</p>
+    <a :href="'tel:'+phone">打</a>
   </div>
 </template>
 <script>
 export default {
   name: "phone",
-  props: ["color"],
+  props: ["color", "phone"],
   data() {
     return {};
   }

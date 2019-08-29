@@ -11,13 +11,12 @@
       </div>
     </div>
     <!-- video -->
-    <div class="video" @click.stop="closeVideo = true" v-if="!closeVideo">
+    <div class="video" @click.stop="handleCloseVideo" v-if="!closeVideo">
       <div :class="['box',{'active':trans}]" :style="{'width':hh+'px','height':ww+'px'}">
         <canvas class="can"></canvas>
         <video
           src="http://www.hzsinq.com/static/img/init.mp4"
           ref="video"
-          muted
           x-webkit-airplay="true"
           webkit-playsinline="true"
           playsinline="true"
@@ -29,7 +28,7 @@
     </div>
     <!-- mp3 -->
     <div class="mp3">
-      <audio src="http://www.hzsinq.com/static/img/bg.mp3" loop controls ref="audio"></audio>
+      <audio src="http://www.hzsinq.com/static/img/bg.mp3" loop ref="audio"></audio>
     </div>
     <!-- swiper -->
     <swiper
@@ -61,7 +60,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/1.png"
                 alt
               />
@@ -71,11 +70,7 @@
               <a href="javascript:" class="p5-2">
                 <img src="/static/img/p5/at/3.png" alt />
               </a>
-              <a
-                href="http://www.xsnet.cn/news/szjj/2017_10/2821604.shtml"
-                class="p5-3"
-                target="_blank"
-              >
+              <a href="javascript:" class="p5-3" target="_blank">
                 <img src="/static/img/p5/at/4.png" alt />
               </a>
               <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
@@ -99,7 +94,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/2.png"
                 alt
               />
@@ -109,11 +104,7 @@
               <a href="javascript:" class="p5-2">
                 <img src="/static/img/p5/jn/3.png" alt />
               </a>
-              <a
-                href="https://mp.weixin.qq.com/s/5BmAMb-wnIt9cb-x6Z5jwA"
-                class="p5-3"
-                target="_blank"
-              >
+              <a href="javascript:" class="p5-3" target="_blank">
                 <img src="/static/img/p5/jn/4.png" alt />
               </a>
               <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
@@ -128,7 +119,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/3.png"
                 alt
               />
@@ -138,11 +129,7 @@
               <a href="javascript:" class="p5-2">
                 <img src="/static/img/p5/kh/3.png" alt />
               </a>
-              <a
-                class="p5-3"
-                href="http://www.hzxh.gov.cn/col/col1376445/index.html"
-                target="_blank"
-              >
+              <a class="p5-3" href="javascript:" target="_blank">
                 <img src="/static/img/p5/kh/4.png" alt />
               </a>
               <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
@@ -157,7 +144,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/4.png"
                 alt
               />
@@ -167,11 +154,7 @@
               <a href="javascript:" class="p5-2">
                 <img src="/static/img/p5/lc/3.png" alt />
               </a>
-              <a
-                class="p5-3"
-                href="http://www.xclcy.com/policy/show.php?itemid=170"
-                target="_blank"
-              >
+              <a class="p5-3" href="javascript:" target="_blank">
                 <img src="/static/img/p5/lc/4.png" alt />
               </a>
               <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
@@ -186,7 +169,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/5.png"
                 alt
               />
@@ -196,11 +179,7 @@
               <a href="javascript:" class="p5-2">
                 <img src="/static/img/p5/wl/4.png" alt />
               </a>
-              <a
-                href="http://www.eyh.cn/class/class_24/Articles/466592.html"
-                target="_blank"
-                class="p5-3"
-              >
+              <a href="javascript:" target="_blank" class="p5-3">
                 <img src="/static/img/p5/wl/3.png" alt />
               </a>
               <a href="javascript:" class="p5-4" @click.stop="handleGetGrand(1)">
@@ -215,7 +194,7 @@
               :style="{'width':hh+'px','height':ww+'px'}"
             >
               <img
-                :class="['bg',{'active':trans && swiperNow == 2}]"
+                :class="['bg p5-box-bg',{'active':trans && swiperNow == 2}]"
                 src="http://www.hzsinq.com/static/img/p5/6.png"
                 alt
               />
@@ -252,10 +231,10 @@
             :key="index"
           >
             <div
-              :class="['box',{'active':trans && swiperNow == 2}]"
+              :class="['box p6-box',{'active':trans && swiperNow == 2}]"
               :style="{'width':hh+'px','height':ww+'px'}"
             >
-              <img :src="item.add" alt />
+              <img class="p6-box-bg" :src="item.add" alt />
               <a class="p6-call" :href="item.tel"></a>
               <div class="p6-cont" if="item.isText">
                 <swiper class="swiper active" :options="swiperScrollOption" ref="scrollSwiper">
@@ -347,7 +326,18 @@ export default {
   watch: {
     awaitOne(db) {
       this.bar = Math.round((db / 9) * 100);
-      this.loadingText = db == 9 ? "点击进入" : "六大万科中心，即将开启";
+      if (db == 9) {
+        this.loadingText = "点击进入";
+        this.handleStart();
+      }
+    },
+    closeVideo(db) {
+      if (db) {
+        if (this.$refs.audio.paused) {
+          //   this.$refs.audio.play();
+          document.querySelector("audio").play();
+        }
+      }
     }
   },
   mounted() {
@@ -375,24 +365,33 @@ export default {
       }
       this.imgOver = true;
       this.start = true;
-      document.querySelector("video").play();
-      // var el = document.documentElement;
-      // var rfs =
-      //   el.requestFullScreen ||
-      //   el.webkitRequestFullScreen ||
-      //   el.mozRequestFullScreen ||
-      //   el.msRequestFullScreen;
-      // if (typeof rfs != "undefined" && rfs) {
-      //   rfs.call(el);
-      // } else if (typeof window.ActiveXObject != "undefined") {
-      //   var wscript = new ActiveXObject("WScript.Shell");
-      //   if (wscript != null) {
-      //     wscript.SendKeys("{F11}");
+      try {
+        document.addEventListener(
+          "WeixinJSBridgeReady",
+          function() {
+            document.querySelector("video").play();
+            document.querySelector("audio").play();
+          },
+          false
+        );
+      } catch (error) {}
+      setInterval(() => {
+        try {
+          let a = document.querySelector("video");
+          let b = document.querySelector("audio");
+          if (a.paused) {
+            a.play();
+          }
+          if (b.paused) {
+            b.play();
+          }
+        } catch (error) {}
+      }, 300);
+      //   document.querySelector("video").play();
+      //   if (this.$refs.audio.paused) {
+      //     this.$refs.audio.play();
+      //     // document.querySelector("audio").play();
       //   }
-      // }
-      if (this.$refs.audio.paused) {
-        this.$refs.audio.play();
-      }
     },
     handleInitSwiper(i = 0) {
       //初始化swiper
@@ -449,43 +448,6 @@ export default {
     },
     handleInitImg() {
       //JS 加载图片
-      let arr = [...this.awaitImg];
-      let len = arr.length,
-        num = 0;
-      for (let i in arr) {
-        let img = new Image();
-        img.onload = e => {
-          try {
-            if (!this.loadImg[arr[i]]) {
-              this.loadImg[arr[i].index] = {};
-            }
-            this.loadImg[arr[i].index][arr[i].name] = arr[i].url;
-            num += 1;
-            this.bar = Math.round((num / len) * 100);
-            if (num == len) {
-              //   this.imgOver = true;
-            }
-          } catch (error) {}
-        };
-        img.src = arr[i].url;
-      }
-    },
-    handleAwaitOne() {
-      //控制视频播放，暂停
-      let videoPlay = false,
-        audioPlay = false;
-      this.videoEl.oncanplay = () => {
-        this.awaitOne += 1;
-        videoPlay = true;
-      };
-      this.videoEl.onended = () => {
-        this.closeVideo = true;
-      };
-      // mp3
-      this.audioEl.oncanplay = () => {
-        this.awaitOne += 1;
-        audioPlay = true;
-      };
       // p4 img
       let img = new Image();
       img.onload = () => {
@@ -500,6 +462,35 @@ export default {
         };
         img.src = "http://www.hzsinq.com/static/img/p5/" + i + ".png";
       }
+    },
+    handleCloseVideo() {
+      this.closeVideo = true;
+      if (this.$refs.audio.paused) {
+        //   this.$refs.audio.play();
+        document.querySelector("audio").play();
+      }
+    },
+    handleAwaitOne() {
+      //控制视频播放，暂停
+      let videoPlay = false,
+        audioPlay = false;
+      this.videoEl.oncanplay = () => {
+        this.awaitOne += 1;
+        videoPlay = true;
+      };
+      this.videoEl.onended = () => {
+        this.closeVideo = true;
+        if (this.$refs.audio.paused) {
+          //   this.$refs.audio.play();
+          document.querySelector("audio").play();
+        }
+      };
+      // mp3
+      this.audioEl.oncanplay = () => {
+        this.awaitOne += 1;
+        audioPlay = true;
+      };
+
       setTimeout(() => {
         if (!videoPlay) {
           this.awaitOne += 1;
@@ -507,6 +498,7 @@ export default {
         if (!audioPlay) {
           this.awaitOne += 1;
         }
+        this.handleInitImg();
       }, 5000);
     },
     handleShowImg(i) {
@@ -522,7 +514,6 @@ export default {
       this.childIndex = i;
     },
     handleGetGrand(i) {
-      console.log(i);
       this.swiperTo1 = true;
       this.swiper.slideTo(2);
       this.swiperGrand.slideTo(i, 0);
@@ -721,14 +712,18 @@ function setRem() {
             transform-origin: 50% 50%;
             transform: matrix(0, -1, 1, 0, 0, 0);
           }
+          &.p5-box-bg,
+          &.p6-box-bg {
+            height: 100%;
+          }
         }
         &.active {
           transform: matrix(1, 0, 0, 1, 0, 0);
         }
         &.p5-box {
           a {
-            width: 70%;
-            left: 4.5rem;
+            width: 60%;
+            left: 5.5rem;
           }
           .p5-1 {
             position: absolute;
@@ -803,8 +798,8 @@ function setRem() {
         }
         .p6-cont {
           position: absolute;
-          width: 10rem;
-          height: 6rem;
+          width: 9rem;
+          height: 5rem;
           left: 6rem;
           overflow-y: scroll;
           -webkit-overflow-scrolling: touch;
@@ -817,13 +812,13 @@ function setRem() {
             .p6-cont-title {
               background-color: #b2b2b2;
               margin-right: 0.2rem;
-              font-size: 0.4rem;
+              font-size: 0.36rem;
               padding: 0 0.1rem;
               color: #f1f1f1;
               flex-shrink: 0;
             }
             .p6-cont-text {
-              font-size: 0.4rem;
+              font-size: 0.36rem;
               color: #767777;
             }
           }
